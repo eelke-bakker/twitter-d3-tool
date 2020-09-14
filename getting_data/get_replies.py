@@ -3,6 +3,7 @@ import tweepy
 import ssl
 import os
 import time
+import json
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -21,8 +22,11 @@ def obj_to_dict(obj):
     tweet_dict = {}
     for attr in vars(obj):
         if not attr.startswith('_'):
-            tweet_dict[attr] = getattr(obj, attr)
-        
+            if attr == 'user':
+                tweet_dict[attr] = json.dumps(getattr(obj.user, "_json"))
+            else:
+                tweet_dict[attr] = getattr(obj, attr)
+                  
     return tweet_dict
 
 
