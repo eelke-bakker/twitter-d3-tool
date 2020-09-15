@@ -31,8 +31,8 @@ def obj_to_dict(obj):
 
 
 def get_tweets(name):
+    replies=[]
     try:
-        replies=[]
         count = 0
         for tweet in tweepy.Cursor(api.search, q='to:'+name, result_type='recent', auto_populate_reply_metadata=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, timeout=99000000).items(5):
             count += 1
@@ -48,7 +48,7 @@ def write_to_csv(replies):
     dict_keys = ['created_at', 'id', 'id_str', 'text', 'truncated', 'entities', 'metadata', 'source', 'source_url', 'in_reply_to_status_id', 
     'in_reply_to_status_id_str', 'in_reply_to_user_id', 'in_reply_to_user_id_str', 'in_reply_to_screen_name', 'author', 'user', 'geo', 
     'coordinates', 'place', 'contributors', 'is_quote_status', 'quoted_status_id_str', 'quoted_status', 'quoted_status_id', 'possibly_sensitive', 
-    'retweeted_status', 'retweet_count', 'favorite_count', 'favorited', 'retweeted', 'lang', 'extended_entities']
+    'retweeted_status', 'retweet_count', 'favorite_count', 'favorited', 'retweeted', 'lang', 'extended_entities', 'withheld_in_countries']
 
     with open('replies_clean.csv', 'w', encoding='utf-8', newline='') as f:
         csv_writer = csv.DictWriter(f, fieldnames=dict_keys)
