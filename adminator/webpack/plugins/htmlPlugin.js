@@ -18,6 +18,7 @@ const titles = {
   'signin': 'Signin',
   'signup': 'Signup',
   'ui': 'UI',
+  'users': 'Users',
   'vector-maps': 'Vector Maps',
   '404': '404',
   '500': '500',
